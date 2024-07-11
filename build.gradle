@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+	id 'application'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.apps.trippin'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	compileOnly 'javax.servlet:servlet-api:2.5'
+	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+	implementation 'com.google.guava:guava:r05'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+	implementation 'org.liquibase:liquibase-core:4.25.1'
+    implementation 'com.amazonaws:aws-java-sdk-bundle:1.12.667'
+	implementation 'commons-io:commons-io:2.15.0'
+	implementation 'org.modelmapper:modelmapper:3.1.1'
+	
+	
+implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0"){
+    exclude group: "io.swagger.core.v3", module:"swagger-annotations"
+}
+// https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
+implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
+	
+}
+
+application {
+    // Define the main class for your application
+    mainClassName = 'com.apps.trippin.TrippinApplication'
+    applicationDefaultJvmArgs =  ['-Dspring.profiles.active=dev']
+    
+
+}
+
+repositories {
+    flatDir { dirs 'lib' }
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
